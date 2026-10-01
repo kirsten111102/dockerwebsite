@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Yukihira Diner - Admin Dashboard</title>
+    <link rel="stylesheet" href="/css/admin.css">
+</head>
+
+<body>
+    <aside class="admin-sidebar">
+        <h2>Yukihira Admin</h2>
+        <ul>
+            <li><a href="/admin" class="active">📊 Manage Menu</a></li>
+            <li><a href="/">🏠 Back to Website</a></li>
+            <li><a href="/admin/logout" class="logout-link">🚪 Logout</a></li>
+        </ul>
+    </aside>
+
+    <main class="admin-main">
+        <header class="admin-header">
+            <h1>Restaurant Control Panel</h1>
+            <span class="admin-user">Chef: <strong>Soma Yukihira</strong></span>
+        </header>
+
+        <!-- Add Dish Form -->
+        <section class="admin-section" style="margin-bottom: 2rem;">
+            <h2>Add New Recipe</h2>
+            <form action="/admin/dishes/add" method="POST" class="add-form">
+                <input type="text" name="name" placeholder="Dish Name (e.g., Souffle Omelet)" required>
+                <input type="text" name="category" placeholder="Category (e.g., Main Course)" required>
+                <input type="number" step="0.01" name="price" placeholder="Price ($)" required>
+                <input type="text" name="image" placeholder="Image URL (Anime link)" required>
+                <textarea name="description" placeholder="Dish description..." required></textarea>
+                <button type="submit" class="btn-primary">Add to Menu</button>
+            </form>
+        </section>
+
+        <!-- Existing Menu Table -->
+        <section class="admin-section">
+            <h2>Current Menu Inventory</h2>
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>Image</th>
+                        <th>Name</th>
+                        <th>Category</th>
+                        <th>Price</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% dishes.forEach(dish=> { %>
+                        <tr>
+                            <td><img src="<%= dish.image %>" width="50" style="border-radius: 4px;"></td>
+                            <td>
+                                <%= dish.name %>
+                            </td>
+                            <td>
+                                <%= dish.category %>
+                            </td>
+                            <td>$<%= dish.price.toFixed(2) %>
+                            </td>
+                            <td>
+                                <form action="/admin/dishes/delete/<%= dish._id %>" method="POST"
+                                    style="display:inline;">
+                                    <button type="submit" class="btn-delete">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                        <% }) %>
+                </tbody>
+            </table>
+        </section>
+    </main>
+</body>
+
+</html>

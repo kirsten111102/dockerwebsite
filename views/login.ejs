@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Yukihira Diner - Admin Login</title>
+    <link rel="stylesheet" href="/css/login.css">
+</head>
+
+<body class="login-body">
+    <div class="login-card">
+        <h2>Yukihira Admin Portal</h2>
+        <p>Restricted Access: Head Chef Only</p>
+
+        <% if (error) { %>
+            <div class="error-msg">
+                <%= error %>
+            </div>
+            <% } %>
+
+                <form action="/admin/login" method="POST" class="login-form">
+                    <input type="text" name="username" placeholder="Username" required>
+                    <input type="password" name="password" placeholder="Password" required>
+                    <button type="submit" class="btn-primary">Login to Kitchen</button>
+                </form>
+
+                <a href="/" class="back-link">← Back to Public Website</a>
+    </div>
+</body>
+
+</html>

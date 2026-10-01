@@ -1,0 +1,489 @@
+/* --- 1. Global Reset (Removes default browser margins & spaces) --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* Optional: clean font fallback */
+    background-color: #121212;
+    /* Matches dark theme */
+}
+
+/* --- 2. Sticky/Fixed Navbar --- */
+.navbar {
+    background-color: #333;
+    padding: 1rem;
+    top: 0;
+    left: 0;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+    /* Ensures navbar always stays on top of other elements */
+}
+
+.navbar ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.navbar li {
+    margin: 0;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    transition: background-color 0.2s ease;
+}
+
+.navbar a:hover {
+    background-color: #555;
+    border-radius: 4px;
+}
+
+/* --- 3. Hero Section (Pushed down so navbar doesn't cover it) --- */
+.hero {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 85vh;
+
+    /* Pushes the hero down so it clears the fixed navbar height */
+    padding-top: 70px;
+
+    background-image: linear-gradient(to bottom,
+            rgba(15, 15, 15, 0.4),
+            rgba(15, 15, 15, 0.75)), url('/images/restaurantbanner.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    text-align: center;
+    color: #ffffff;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+}
+
+.hero-content {
+    max-width: 800px;
+    z-index: 2;
+}
+
+.hero-content h1 {
+    font-size: 3.2rem;
+    font-weight: 800;
+    margin-bottom: 1.2rem;
+    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.7);
+    letter-spacing: 1px;
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    color: #e2e8f0;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+    line-height: 1.6;
+}
+
+.hero-content .btn {
+    display: inline-block;
+    background-color: #ff5722;
+    color: #ffffff;
+    padding: 0.85rem 2.2rem;
+    font-size: 1.05rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 87, 34, 0.4);
+}
+
+.hero-content .btn:hover {
+    background-color: #f4511e;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(255, 87, 34, 0.6);
+}
+
+.featured-menu {
+    padding: 5rem 2rem;
+    background-color: #161616;
+    text-align: center;
+    color: #ffffff;
+}
+
+.featured-menu h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: #ff5722;
+}
+
+.section-subtitle {
+    color: #a0aec0;
+    margin-bottom: 3rem;
+    font-size: 1.1rem;
+}
+
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.menu-card {
+    background-color: #1f1f1f;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease;
+    text-align: left;
+}
+
+.menu-card:hover {
+    transform: translateY(-8px);
+}
+
+.menu-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.menu-card h3 {
+    font-size: 1.3rem;
+    margin: 1.2rem 1.2rem 0.5rem 1.2rem;
+}
+
+.menu-card p {
+    font-size: 0.95rem;
+    color: #cbd5e0;
+    margin: 0 1.2rem 1.5rem 1.2rem;
+    line-height: 1.5;
+}
+
+.menu-card .price {
+    display: block;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #ff5722;
+    margin: 0 1.2rem 1.5rem 1.2rem;
+}
+
+/* --- Shared Section Styling --- */
+.section-tag {
+    display: inline-block;
+    color: #ff5722;
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 0.5rem;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 3.5rem;
+}
+
+.section-header h2 {
+    font-size: 2.5rem;
+    color: #ffffff;
+    margin-bottom: 0.5rem;
+}
+
+.section-header p {
+    color: #a0aec0;
+    font-size: 1.1rem;
+}
+
+/* --- About / Chef's Philosophy Section --- */
+.about-section {
+    padding: 6rem 2rem;
+    background-color: #121212;
+    color: #ffffff;
+}
+
+.about-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 4rem;
+    align-items: center;
+}
+
+.about-image-wrapper {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+}
+
+.about-img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+.about-image-wrapper:hover .about-img {
+    transform: scale(1.03);
+}
+
+.about-badge {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    background: rgba(15, 15, 15, 0.85);
+    backdrop-filter: blur(8px);
+    padding: 0.75rem 1.25rem;
+    border-left: 4px solid #ff5722;
+    border-radius: 4px;
+}
+
+.badge-title {
+    display: block;
+    font-size: 0.75rem;
+    color: #a0aec0;
+    text-transform: uppercase;
+}
+
+.badge-subtitle {
+    font-weight: 700;
+    font-size: 1rem;
+    color: #ffffff;
+}
+
+.about-content h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+}
+
+.about-content p {
+    color: #cbd5e0;
+    line-height: 1.7;
+    margin-bottom: 1.2rem;
+    font-size: 1.05rem;
+}
+
+.btn-secondary {
+    display: inline-block;
+    margin-top: 1rem;
+    background: transparent;
+    color: #ff5722;
+    border: 2px solid #ff5722;
+    padding: 0.75rem 2rem;
+    font-weight: 600;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+    background: #ff5722;
+    color: #ffffff;
+    transform: translateY(-2px);
+}
+
+/* --- Specials & Testimonials Section --- */
+.specials-section {
+    padding: 6rem 2rem;
+    background-color: #181818;
+    color: #ffffff;
+    border-top: 1px solid #222;
+    border-bottom: 1px solid #222;
+}
+
+.specials-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.special-banner {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    background: #1f1f1f;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+    margin-bottom: 4rem;
+    border: 1px solid #2a2a2a;
+}
+
+.special-image img {
+    width: 100%;
+    height: 100%;
+    min-height: 300px;
+    object-fit: cover;
+}
+
+.special-info {
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.tag-highlight {
+    background: rgba(255, 87, 34, 0.15);
+    color: #ff5722;
+    padding: 0.25rem 0.75rem;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    align-self: flex-start;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+}
+
+.special-info h3 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.special-info p {
+    color: #cbd5e0;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+}
+
+.special-price-row {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.special-price {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #ff5722;
+}
+
+.badge-limited {
+    background: #2d3748;
+    color: #e2e8f0;
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+}
+
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.testimonial-card {
+    background: #1f1f1f;
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    border: 1px solid #2a2a2a;
+    display: flex;
+    flex-direction: column;
+}
+
+.stars {
+    color: #ecc94b;
+    margin-bottom: 1rem;
+    letter-spacing: 2px;
+}
+
+.quote {
+    color: #e2e8f0;
+    font-style: italic;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    flex-grow: 1;
+}
+
+.author {
+    font-weight: 700;
+    color: #ffffff;
+    font-size: 1.05rem;
+}
+
+.author-title {
+    font-size: 0.85rem;
+    color: #a0aec0;
+}
+
+/* --- Footer --- */
+.site-footer {
+    background-color: #0d0d0d;
+    color: #a0aec0;
+    padding: 5rem 2rem 2rem 2rem;
+    border-top: 1px solid #222;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 3rem;
+    margin-bottom: 3rem;
+}
+
+.footer-col h3 {
+    color: #ffffff;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.footer-col h4 {
+    color: #ffffff;
+    font-size: 1.2rem;
+    margin-bottom: 1.2rem;
+}
+
+.footer-col p {
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.dorm-tag {
+    display: inline-block;
+    background: #1a202c;
+    color: #cbd5e0;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+}
+
+.footer-col ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-col ul li {
+    margin-bottom: 0.75rem;
+    line-height: 1.5;
+}
+
+.footer-col ul li span {
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.footer-bottom {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-top: 2rem;
+    border-top: 1px solid #1f1f1f;
+    text-align: center;
+    font-size: 0.9rem;
+    color: #718096;
+}

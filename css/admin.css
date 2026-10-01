@@ -1,0 +1,15 @@
+.add-form {
+    display: grid;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    max-width: 600px;
+}
+
+.add-form input,
+.add-form textarea {
+    padding: 0.75rem;
+    background: #121212;
+    border: 1px solid #2a2a2a;
+    color: white;
+    border-radius: 6px;
+}

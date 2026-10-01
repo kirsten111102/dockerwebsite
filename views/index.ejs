@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/index.css">
+    <title>Yukihira Restaurant Homepage</title>
+</head>
+
+<body>
+    <nav class="navbar">
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/products">Products</a></li>
+        </ul>
+    </nav>
+    <div class="hero">
+        <div class="hero-content">
+            <h1>Welcome to Yukihira Restaurant</h1>
+            <p>Experience the best dining with our exquisite menu and exceptional service.</p>
+            <a href="/products" class="btn">View Our Menu</a>
+        </div>
+    </div>
+    <section class="featured-menu">
+        <h2>Signature Creations</h2>
+        <p class="section-subtitle">Handcrafted with passion, perfected through culinary battles.</p>
+
+        <div class="menu-grid">
+            <% dishes.forEach(dish=> { %>
+                <div class="menu-card">
+                    <img src="<%= dish.image %>" alt="<%= dish.name %>">
+                    <h3>
+                        <%= dish.name %>
+                    </h3>
+                    <p>
+                        <%= dish.description %>
+                    </p>
+                    <span class="price">$<%= dish.price.toFixed(2) %></span>
+                </div>
+                <% }) %>
+        </div>
+    </section>
+
+    <!-- ABOUT / CHEF'S PHILOSOPHY SECTION -->
+    <section id="about" class="about-section">
+        <div class="about-container">
+            <!-- 2-Column Split: Diner Interior Image -->
+            <div class="about-image-wrapper">
+                <img src="http://googleusercontent.com/image_collection/image_retrieval/4124799834299955030_0"
+                    alt="Yukihira Diner Interior" class="about-img">
+                <div class="about-badge">
+                    <span class="badge-title">Established</span>
+                    <span class="badge-subtitle">Jouchiro & Soma</span>
+                </div>
+            </div>
+
+            <!-- Heartfelt Text & Learn More -->
+            <div class="about-content">
+                <span class="section-tag">Family Tradition & Relentless Spirit</span>
+                <h2>The Soul of Yukihira Diner</h2>
+                <p>
+                    Cooking isn't just about following a recipe—it’s about putting your entire heart, soul, and ego on
+                    the plate. Founded by Jouchiro Yukihira and carried forward by Soma, our diner represents a
+                    relentless pursuit of flavor through constant experimentation, fierce culinary challenges, and above
+                    all, hospitality that makes every guest feel at home.
+                </p>
+                <p>
+                    Whether it's turning humble supermarket ingredients into an explosion of umami or testing recipes
+                    late into the night like we're back at the Polar Star Dormitory, every dish tells a story.
+                </p>
+                <a href="#menu" class="btn-secondary">Our Culinary Philosophy</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- DAILY SPECIALS & TESTIMONIALS SECTION -->
+    <section id="specials" class="specials-section">
+        <div class="specials-container">
+            <div class="section-header">
+                <span class="section-tag">God Tongue Approved</span>
+                <h2>Daily Specials & Reviews</h2>
+                <p>See what the elite critics and fellow chefs have to say about today's secret creation.</p>
+            </div>
+
+            <!-- Special Banner (Today's Secret Recipe) -->
+            <div class="special-banner">
+                <div class="special-image">
+                    <img src="http://googleusercontent.com/image_collection/image_retrieval/16295564396780985795_0"
+                        alt="Erina Nakiri Food Tasting">
+                </div>
+                <div class="special-info">
+                    <span class="tag-highlight">Today's Special Secret Recipe</span>
+                    <h3>Chaliapin Steak Don (Special Polar Star Edition)</h3>
+                    <p>
+                        Tenderized in minced onions to melt on your tongue, layered over fluffy seasoned rice with a
+                        secret umami reduction. As evaluated by the God Tongue herself: <em>"Inacceptable... yet
+                            surprisingly captivating."</em>
+                    </p>
+                    <div class="special-price-row">
+                        <span class="special-price">$24.50</span>
+                        <span class="badge-limited">Limited Servings Daily</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Testimonial Cards -->
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="quote">"The flavors hit you like a sensory explosion! You can feel the sheer willpower and
+                        rebellious creativity in every single bite."</p>
+                    <span class="author">— Takumi Aldini</span>
+                    <span class="author-title">Trattoria Aldini Chef</span>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="quote">"It warms you right down to your soul. The hospitality here reminds me of the best
+                        kitchen family anyone could ask for."</p>
+                    <span class="author">— Megumi Tadokoro</span>
+                    <span class="author-title">Polar Star Dormitory Resident</span>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="quote">"Hmph. The technique is unorthodox, but the culinary logic holds up. I suppose...
+                        it's worthy of consideration."</p>
+                    <span class="author">— Erina Nakiri</span>
+                    <span class="author-title">Director, Totsuki Culinary Academy</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-col">
+                <h3>Yukihira Diner</h3>
+                <p>Bringing high-end culinary battles and hearty family diner comfort to your table. Taste the passion!
+                </p>
+                <div class="dorm-tag">🏠 Inspired by Polar Star Dormitory Spirit</div>
+            </div>
+
+            <div class="footer-col">
+                <h4>Operating Hours</h4>
+                <ul>
+                    <li><span>Monday - Friday:</span> 11:00 AM – 10:00 PM</li>
+                    <li><span>Saturday:</span> 12:00 PM – 11:00 PM</li>
+                    <li><span>Sunday:</span> Closed (Research & Recipe Testing)</li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Location & Contact</h4>
+                <p>📍 Sumiyoshi Ward, Osaka (Near Totsuki District)</p>
+                <p>📞 +81 (03) 555-YUKI</p>
+                <p>✉️ orders@yukihira-diner.anime</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Yukihira Diner. All rights reserved. Built with passion & Shokugeki spirit.</p>
+        </div>
+    </footer>
+</body>
+
+</html>
