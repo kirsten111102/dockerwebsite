@@ -1,0 +1,48 @@
+services:
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: production
+      MONGODB_URI: mongodb://mongo:27017/yukihira_diner
+      SESSION_SECRET: ${SESSION_SECRET}
+      RABBITMQ_URL: amqp://rabbitmq:5672
+    depends_on:
+      - mongo
+      - rabbitmq
+    volumes:
+      - ./public/images/foods:/app/public/images/foods
+
+  worker:
+    build: .
+    command: node workers/imageWorker.js
+    restart: unless-stopped
+    environment:
+      MONGODB_URI: mongodb://mongo:27017/yukihira_diner
+      RABBITMQ_URL: amqp://rabbitmq:5672
+    depends_on:
+      - mongo
+      - rabbitmq
+    volumes:
+      - ./public/images/foods:/app/public/images/foods
+
+  rabbitmq:
+    image: rabbitmq:4-management
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:15672:15672"
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+
+  mongo:
+    image: mongo:8.0.4
+    restart: unless-stopped
+    environment:
+      GLIBC_TUNABLES: "glibc.pthread.rseq=1"
+    volumes:
+      - mongodb_data:/data/db
+
+volumes:
+  rabbitmq_data:
+  mongodb_data:

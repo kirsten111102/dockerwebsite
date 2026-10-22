@@ -1,120 +1,75 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const path = require('path');
-const session = require('express-session'); // <--- 1. Import session
-const Dish = require('./models/Dish');
+require("dotenv").config();
+
+const express = require("express");
+const mongoose = require("mongoose");
+const session = require("express-session");
+const MongoStore = require("connect-mongo").default;
+const helmet = require("helmet");
+const path = require("path");
+
+const publicRoutes = require("./routes/public");
+const adminRoutes = require("./routes/admin");
 
 const app = express();
 
-// 2. Middleware & Configuration
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
-app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, 'public')));
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "views"));
 
-// 3. Configure Session Middleware
-app.use(session({
-    secret: 'yukihira_secret_key_change_this', // Change this to a secure random string in production
-    resave: false,
-    saveUninitialized: false,
-    cookie: { maxAge: 1000 * 60 * 60 * 2 } // Session lasts for 2 hours
+app.use(express.static(path.join(__dirname, "public")));
+app.use(express.urlencoded({
+    extended: false,
+    limit: "20kb"
 }));
 
-// Connect to MongoDB
-mongoose.connect('mongodb://localhost:27017/yukihira_diner')
-    .then(() => console.log('Connected to MongoDB successfully!'))
-    .catch(err => console.error('MongoDB connection error:', err));
-
-// --- 4. AUTHENTICATION MIDDLEWARE ---
-const isAdmin = (req, res, next) => {
-    if (req.session && req.session.isAdminAuthenticated) {
-        return next(); // User is logged in as admin, proceed!
+app.use(session({
+    name: "yukihira.sid",
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    store: MongoStore.create({
+        mongoUrl: process.env.MONGODB_URI,
+        collectionName: "sessions"
+    }),
+    cookie: {
+        httpOnly: true,
+        sameSite: "lax",
+        secure: false, // Local testing over HTTP
+        maxAge: 2 * 60 * 60 * 1000
     }
-    res.redirect('/admin/login'); // Not logged in? Send them to the login page
-};
+}));
 
+app.use("/", publicRoutes);
+app.use("/admin", adminRoutes);
 
-// --- PUBLIC ROUTES ---
-app.get('/', async (req, res) => {
-    try {
-        const dishes = await Dish.find({});
-        res.render('index', { dishes });
-    } catch (err) {
-        console.error(err);
-        res.status(500).send('Server Error');
-    }
+app.use((req, res) => {
+    res.status(404).send("Page not found.");
 });
 
+app.use((err, req, res, next) => {
+    console.error(err);
 
-// --- ADMIN AUTH ROUTES ---
-
-// Render Login Page
-app.get('/admin/login', (req, res) => {
-    res.render('login', { error: null });
-});
-
-// Handle Login Submission
-app.post('/admin/login', (req, res) => {
-    const { username, password } = req.body;
-
-    // Hardcoded admin credentials (in production, store hashed passwords in MongoDB)
-    const ADMIN_USER = "soma";
-    const ADMIN_PASS = "totsuki123";
-
-    if (username === ADMIN_USER && password === ADMIN_PASS) {
-        req.session.isAdminAuthenticated = true; // Set session flag
-        return res.redirect('/admin');
+    if (res.headersSent) {
+        return next(err);
     }
 
-    res.render('login', { error: 'Invalid credentials! Try again.' });
+    res.status(500).send("Something went wrong. Please try again.");
 });
 
-// Handle Logout
-app.get('/admin/logout', (req, res) => {
-    req.session.destroy(() => {
-        res.redirect('/admin/login');
+async function startServer() {
+    if (!process.env.MONGODB_URI || !process.env.SESSION_SECRET) {
+        throw new Error("MONGODB_URI and SESSION_SECRET must be configured.");
+    }
+
+    await mongoose.connect(process.env.MONGODB_URI);
+
+    const port = process.env.PORT || 3000;
+
+    app.listen(port, () => {
+        console.log(`Yukihira Diner running at http://localhost:${port}`);
     });
-});
+}
 
-
-// --- PROTECTED ADMIN ROUTES (Protected by `isAdmin` middleware) ---
-
-// Admin Dashboard
-app.get('/admin', isAdmin, async (req, res) => {
-    try {
-        const dishes = await Dish.find({});
-        res.render('admin', { dishes });
-    } catch (err) {
-        console.error(err);
-        res.status(500).send('Server Error');
-    }
-});
-
-// Add Dish
-app.post('/admin/dishes/add', isAdmin, async (req, res) => {
-    try {
-        const { name, category, price, description, image } = req.body;
-        await Dish.create({ name, category, price, description, image });
-        res.redirect('/admin');
-    } catch (err) {
-        console.error(err);
-        res.status(500).send('Failed to add dish');
-    }
-});
-
-// Delete Dish
-app.post('/admin/dishes/delete/:id', isAdmin, async (req, res) => {
-    try {
-        await Dish.findByIdAndDelete(req.params.id);
-        res.redirect('/admin');
-    } catch (err) {
-        console.error(err);
-        res.status(500).send('Failed to delete dish');
-    }
-});
-
-// Start Server
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-    console.log(`Yukihira Diner server running on http://localhost:${PORT}`);
+startServer().catch((error) => {
+    console.error("Failed to start server:", error);
+    process.exit(1);
 });

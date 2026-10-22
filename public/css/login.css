@@ -1,0 +1,120 @@
+/* ===== Login page ===== */
+.login-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 1.5rem;
+    background:
+        radial-gradient(ellipse at top, #382718 0%, #191614 42%, #101010 80%);
+    color: #f5f5f5;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Arial, sans-serif;
+}
+
+.login-card {
+    width: 100%;
+    max-width: 420px;
+    padding: 2.5rem;
+    border: 1px solid #38312a;
+    border-radius: 18px;
+    background: rgba(27, 27, 27, 0.97);
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.4);
+}
+
+.login-card h2 {
+    margin: 0 0 0.5rem;
+    color: #f2a541;
+    font-size: 1.8rem;
+    text-align: center;
+}
+
+.login-card>p {
+    margin: 0 0 2rem;
+    color: #aaa39a;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+.login-form {
+    display: grid;
+    gap: 1rem;
+    margin: 0;
+}
+
+.login-form input {
+    width: 100%;
+    min-height: 48px;
+    padding: 0.85rem 1rem;
+    border: 1px solid #363636;
+    border-radius: 8px;
+    outline: none;
+    background: #121212;
+    color: #fff;
+    font: inherit;
+    font-size: 0.95rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.login-form input::placeholder {
+    color: #888;
+}
+
+.login-form input:focus {
+    border-color: #f2a541;
+    box-shadow: 0 0 0 3px rgba(242, 165, 65, 0.13);
+}
+
+.login-form .btn-primary {
+    width: 100%;
+    min-height: 48px;
+    margin-top: 0.5rem;
+    padding: 0.85rem 1rem;
+    border: none;
+    border-radius: 8px;
+    background: #f2a541;
+    color: #21170b;
+    font: inherit;
+    font-weight: 750;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+}
+
+.login-form .btn-primary:hover {
+    background: #ffc36b;
+    transform: translateY(-1px);
+}
+
+.back-link {
+    display: block;
+    margin-top: 1.5rem;
+    color: #c2b9ad;
+    font-size: 0.9rem;
+    text-align: center;
+    text-decoration: none;
+}
+
+.back-link:hover {
+    color: #ffc36b;
+}
+
+.login-card .error-msg {
+    margin: 0 0 1.25rem;
+    padding: 0.85rem 1rem;
+    border: 1px solid #743737;
+    border-radius: 8px;
+    background: #351d1d;
+    color: #ffb4b4;
+    font-size: 0.9rem;
+}
+
+@media (max-width: 480px) {
+    .login-card {
+        padding: 1.75rem 1.25rem;
+    }
+
+    .login-card h2 {
+        font-size: 1.55rem;
+    }
+}

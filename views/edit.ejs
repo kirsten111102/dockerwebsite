@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Dish - Yukihira Diner</title>
+    <link rel="stylesheet" href="/css/admin.css">
+</head>
+
+<body>
+    <main class="admin-main">
+        <h1>Edit Dish</h1>
+
+        <% if (error) { %>
+            <p class="error-msg">
+                <%= error %>
+            </p>
+            <% } %>
+
+                <form action="/admin/dishes/<%= dish._id %>/edit" method="POST" class="add-form">
+                    <label for="name">Dish name</label>
+                    <input id="name" type="text" name="name" value="<%= dish.name %>" maxlength="120" required>
+
+                    <label for="category">Category</label>
+                    <input id="category" type="text" name="category" value="<%= dish.category %>" maxlength="60"
+                        required>
+
+                    <label for="price">Price ($)</label>
+                    <input id="price" type="number" name="price" min="0" step="0.01" value="<%= dish.price %>" required>
+
+
+                    <label for="image">Image URL or Local Path</label>
+                    <input id="image" type="text" name="image" value="<%= dish.image %>" maxlength="2048" required>
+
+                    <label for="description">Description</label>
+                    <textarea id="description" name="description" maxlength="2000"
+                        required><%= dish.description %></textarea>
+
+                    <button type="submit" class="btn-primary">
+                        Save Changes
+                    </button>
+
+                    <a href="/admin">Cancel</a>
+                </form>
+    </main>
+</body>
+
+</html>

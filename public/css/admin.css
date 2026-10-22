@@ -1,0 +1,444 @@
+/* ===== Admin dashboard layout ===== */
+.admin-main {
+    min-width: 0;
+    margin-left: 250px;
+    padding: 2rem;
+    color: #f5f5f5;
+}
+
+.admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid #303030;
+}
+
+.admin-header h1,
+.admin-main>h1 {
+    margin: 0 0 1rem;
+    color: black;
+}
+
+.admin-user {
+    color: black;
+}
+
+/* ===== Sidebar ===== */
+.admin-sidebar {
+    position: fixed;
+    inset: 0 auto 0 0;
+    width: 250px;
+    padding: 1.5rem 1rem;
+    background: #191919;
+    border-right: 1px solid #303030;
+}
+
+.admin-sidebar h2 {
+    margin: 0 0 2rem;
+    color: #f2a541;
+    text-align: center;
+}
+
+.admin-sidebar ul {
+    display: grid;
+    gap: 0.5rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.admin-sidebar a,
+.logout-link {
+    display: block;
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border: 0;
+    border-radius: 8px;
+    background: transparent;
+    color: #ddd;
+    font: inherit;
+    text-align: left;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+}
+
+.admin-sidebar a:hover,
+.admin-sidebar a.active,
+.logout-link:hover {
+    background: #30271d;
+    color: #ffc36b;
+}
+
+/* ===== Sections and forms ===== */
+.admin-section {
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    border: 1px solid #303030;
+    border-radius: 14px;
+    background: #1b1b1b;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.admin-section h2 {
+    margin: 0 0 1.25rem;
+    color: #f2a541;
+    font-size: 1.35rem;
+}
+
+/* Add dish and edit dish */
+.add-form {
+    display: grid;
+    gap: 0.75rem;
+    width: 100%;
+    max-width: 600px;
+    margin-top: 1.5rem;
+}
+
+.add-form label {
+    margin-top: 0.35rem;
+    color: #ded8d0;
+    font-size: 0.92rem;
+    font-weight: 600;
+}
+
+.add-form input,
+.add-form textarea {
+    width: 100%;
+    min-width: 0;
+    padding: 0.85rem 1rem;
+    background: #121212;
+    border: 1px solid #363636;
+    color: #fff;
+    border-radius: 8px;
+    font: inherit;
+    font-size: 0.95rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.add-form input::placeholder,
+.add-form textarea::placeholder {
+    color: #888;
+}
+
+.add-form input:focus,
+.add-form textarea:focus {
+    outline: none;
+    border-color: #f2a541;
+    box-shadow: 0 0 0 3px rgba(242, 165, 65, 0.12);
+}
+
+.add-form textarea {
+    min-height: 130px;
+    resize: vertical;
+    line-height: 1.6;
+}
+
+.btn-primary {
+    justify-self: start;
+    padding: 0.8rem 1.4rem;
+    border: none;
+    border-radius: 8px;
+    background: #f2a541;
+    color: #21170b;
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+}
+
+.btn-primary:hover {
+    background: #ffc36b;
+    transform: translateY(-1px);
+}
+
+.add-form a {
+    justify-self: start;
+    margin-top: 0.4rem;
+    color: #f2a541;
+    text-decoration: none;
+}
+
+.add-form a:hover {
+    color: #ffc36b;
+    text-decoration: underline;
+}
+
+/* ===== Current menu inventory ===== */
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.admin-table th,
+.admin-table td {
+    padding: 1rem 0.85rem;
+    border-bottom: 1px solid #303030;
+    vertical-align: middle;
+}
+
+.admin-table th {
+    background: #252525;
+    color: #f2a541;
+    font-size: 0.9rem;
+}
+
+.admin-table td {
+    color: #e0e0e0;
+}
+
+.admin-table tbody tr:hover {
+    background: #242424;
+}
+
+.admin-table img {
+    display: block;
+    width: 60px;
+    height: 48px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+.admin-table td a {
+    margin-right: 0.6rem;
+    color: #f2a541;
+    text-decoration: none;
+}
+
+.admin-table td a:hover {
+    text-decoration: underline;
+}
+
+.btn-delete {
+    padding: 0.5rem 0.75rem;
+    border: 1px solid #713737;
+    border-radius: 6px;
+    background: #402020;
+    color: #ffaaaa;
+    font: inherit;
+    cursor: pointer;
+}
+
+.btn-delete:hover {
+    background: #6b2929;
+    color: #fff;
+}
+
+.error-msg {
+    margin: 1rem 0;
+    padding: 0.85rem 1rem;
+    border: 1px solid #743737;
+    border-radius: 8px;
+    background: #351d1d;
+    color: #ffb4b4;
+}
+
+/* ===== Responsive dashboard ===== */
+@media (max-width: 800px) {
+    .admin-sidebar {
+        position: static;
+        width: 100%;
+        padding: 1rem;
+        border-right: none;
+        border-bottom: 1px solid #303030;
+    }
+
+    .admin-sidebar h2 {
+        margin-bottom: 1rem;
+    }
+
+    .admin-sidebar ul {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .admin-main {
+        margin-left: 0;
+        padding: 1.25rem;
+    }
+
+    .admin-table {
+        min-width: 600px;
+    }
+
+    .admin-section:has(.admin-table) {
+        overflow-x: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .admin-main {
+        padding: 1rem;
+    }
+
+    .admin-section {
+        padding: 1rem;
+    }
+
+    .admin-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .admin-sidebar ul {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* ===== Edit Dish Page Redesign ===== */
+
+body:has(.admin-main > h1) {
+    min-height: 100vh;
+    margin: 0;
+    background:
+        radial-gradient(ellipse at top,
+            rgba(242, 165, 65, 0.09),
+            transparent 45%),
+        #111;
+    color: #f7f3ed;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Arial, sans-serif;
+}
+
+.admin-main:has(> h1) {
+    width: min(760px, calc(100% - 36px));
+    margin: 0 auto;
+    padding: 60px 0 80px;
+}
+
+.admin-main>h1 {
+    margin: 0 0 8px;
+    color: #f7f3ed;
+    font-size: clamp(2rem, 5vw, 2.8rem);
+    font-weight: 800;
+    letter-spacing: -1px;
+}
+
+/* Small heading accent */
+.admin-main:has(> h1)::before {
+    content: "YUKIHIRA DINER  /  KITCHEN ADMIN";
+    display: block;
+    margin-bottom: 14px;
+    color: #f2a541;
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+/* Form card */
+.admin-main:has(> h1)>.add-form {
+    max-width: none;
+    margin-top: 28px;
+    padding: clamp(22px, 5vw, 40px);
+    gap: 10px;
+    border: 1px solid #37312a;
+    border-radius: 18px;
+    background: #1b1b1b;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.3);
+}
+
+/* Form labels */
+.add-form label {
+    margin-top: 10px;
+    color: #e8dfd3;
+    font-size: 0.9rem;
+    font-weight: 650;
+}
+
+/* Inputs and textarea */
+.add-form input,
+.add-form textarea {
+    width: 100%;
+    min-width: 0;
+    padding: 14px 16px;
+    border: 1px solid #383838;
+    border-radius: 9px;
+    outline: none;
+    background: #121212;
+    color: #fff;
+    font-family: inherit;
+    font-size: 0.95rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.add-form input:focus,
+.add-form textarea:focus {
+    border-color: #f2a541;
+    box-shadow: 0 0 0 3px rgba(242, 165, 65, 0.12);
+}
+
+.add-form textarea {
+    min-height: 150px;
+    resize: vertical;
+    line-height: 1.65;
+}
+
+.add-form input::placeholder,
+.add-form textarea::placeholder {
+    color: #888;
+}
+
+/* Save button */
+.add-form .btn-primary {
+    justify-self: start;
+    margin-top: 18px;
+    padding: 13px 25px;
+    border: none;
+    border-radius: 9px;
+    background: #f2a541;
+    color: #21170b;
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-weight: 750;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+}
+
+.add-form .btn-primary:hover {
+    background: #ffc36b;
+    transform: translateY(-2px);
+}
+
+/* Cancel link */
+.add-form a {
+    justify-self: start;
+    margin-top: 8px;
+    color: #c5b9a9;
+    font-size: 0.92rem;
+    text-decoration: none;
+}
+
+.add-form a:hover {
+    color: #ffc36b;
+    text-decoration: underline;
+}
+
+/* Error message */
+.admin-main .error-msg {
+    padding: 12px 16px;
+    border: 1px solid #743737;
+    border-radius: 9px;
+    background: #351d1d;
+    color: #ffb4b4;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+    .admin-main:has(> h1) {
+        width: calc(100% - 24px);
+        padding-top: 32px;
+    }
+
+    .admin-main:has(> h1)>.add-form {
+        padding: 22px 18px;
+    }
+
+    .add-form .btn-primary {
+        width: 100%;
+    }
+}

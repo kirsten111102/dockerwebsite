@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Menu - Yukihira Diner</title>
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/product.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/products">Products</a></li>
+        </ul>
+    </nav>
+
+    <main class="featured-menu">
+        <h1>Yukihira Diner Menu</h1>
+        <p class="section-subtitle">
+            Discover your next favorite dish.
+        </p>
+
+        <form action="/products" method="GET" class="menu-filters">
+            <input type="search" name="search" placeholder="Search dishes..." value="<%= search %>">
+
+            <select name="category">
+                <option value="">All categories</option>
+
+                <% categories.forEach(item=> { %>
+                    <option value="<%= item %>" <%=category===item ? "selected" : "" %>
+                        >
+                        <%= item %>
+                    </option>
+                    <% }) %>
+            </select>
+
+            <button type="submit" class="btn">Search</button>
+            <a href="/products">Clear filters</a>
+        </form>
+
+        <div class="menu-grid">
+            <% if (dishes.length===0) { %>
+                <p>No dishes match your search.</p>
+                <% } %>
+
+                    <% dishes.forEach(dish=> { %>
+                        <div class="menu-card">
+                            <img src="<%= dish.image %>" alt="<%= dish.name %>" loading="lazy">
+                            <h3>
+                                <%= dish.name %>
+                            </h3>
+                            <p>
+                                <%= dish.category %>
+                            </p>
+                            <p>
+                                <%= dish.description %>
+                            </p>
+                            <span class="price">
+                                $<%= dish.price.toFixed(2) %>
+                            </span>
+                        </div>
+                        <% }) %>
+        </div>
+    </main>
+</body>
+
+</html>
